@@ -1,6 +1,7 @@
 class Category < ApplicationRecord
 	include TransformState
-	
+	include ValidateNameUniqueness
+
 	before_save :transform_state
 	
 	has_many :courses, dependent: :destroy

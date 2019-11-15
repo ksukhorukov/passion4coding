@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
 	include TransformState
+	include ValidateNameUniqueness
 	
 	before_save :transform_state
 	
