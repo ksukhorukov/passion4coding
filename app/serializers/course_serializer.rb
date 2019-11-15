@@ -1,11 +1,23 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :id, :name, :author, :state, :categories
+  attributes :Id, :Name, :Author, :State, :Categories
   
-  def state
+  def Id
+  	object.id 
+  end
+
+  def Name
+  	object.name 
+  end
+
+  def State
   	object.state ? 'active' : 'disabled'
   end
 
-  def categories
+  def Author
+  	object.author 
+  end
+
+  def Categories
   	object.category.id
   end
 end

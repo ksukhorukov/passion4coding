@@ -1,11 +1,19 @@
 class CategorySerializer < ActiveModel::Serializer
-	attributes :id, :name, :state, :verticals
+	attributes :Id, :Name, :State, :Verticals
 
-  def state
+	def Id
+		object.id 
+	end
+
+	def Name
+		object.name 
+	end
+
+  def State
   	object.state ? 'active' : 'disabled'
   end
 
-  def verticals
+  def Verticals
   	object.vertical.id
   end
 end

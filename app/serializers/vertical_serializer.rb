@@ -1,3 +1,11 @@
 class VerticalSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :Id, :Name
+
+  def Id
+  	object.id 
+  end
+
+  def Name
+  	object.name 
+  end
 end
