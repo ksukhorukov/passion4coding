@@ -1,9 +1,11 @@
 class CategorySerializer < ActiveModel::Serializer
-	belongs_to :vertical
-
-  attributes :id, :name, :state
+	attributes :id, :name, :state, :verticals
 
   def state
   	object.state ? 'active' : 'disabled'
+  end
+
+  def verticals
+  	object.vertical.id
   end
 end

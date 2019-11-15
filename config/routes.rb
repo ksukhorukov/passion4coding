@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+	root to: 'verticals#index'
+
   resources :courses
   resources :categories
   resources :verticals
