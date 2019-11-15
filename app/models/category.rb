@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
+	has_many :courses, dependent: :destroy
 	belongs_to :vertical
-	has_many :courses
 
 	validates :name, presence: true
 	validates :state, inclusion: [true, false]
