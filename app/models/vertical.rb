@@ -1,5 +1,8 @@
 class Vertical < ApplicationRecord
+	include CreationEmail
 	include ValidateNameUniqueness
+
+	after_create :creation_email
 	
 	has_many :categories, dependent: :destroy
 	has_many :courses, through: :categories

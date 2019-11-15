@@ -1,9 +1,11 @@
 class Category < ApplicationRecord
+	include CreationEmail
 	include TransformState
 	include ValidateNameUniqueness
 
+	after_create :creation_email
 	before_save :transform_state
-	
+
 	has_many :courses, dependent: :destroy
 	belongs_to :vertical
 

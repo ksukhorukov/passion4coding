@@ -1,7 +1,9 @@
 class Course < ApplicationRecord
+	include CreationEmail
 	include TransformState
 	include ValidateNameUniqueness
 	
+	after_create :creation_email
 	before_save :transform_state
 	
 	belongs_to :category
