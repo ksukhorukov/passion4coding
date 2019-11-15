@@ -26,8 +26,6 @@ class VerticalsController < ApplicationController
 
   # PATCH/PUT /verticals/1
   def update
-    byebug
-    
     if @vertical.update(vertical_params)
       render json: @vertical
     else
@@ -48,6 +46,6 @@ class VerticalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def vertical_params
-      params.permit(:id, :name)
+      params.permit(:id, :name, categories_params: [:id, :name, :state, :vertical_id, :_destroy])
     end
 end
