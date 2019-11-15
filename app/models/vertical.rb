@@ -6,5 +6,5 @@ class Vertical < ApplicationRecord
 																allow_destroy: true,
 																reject_if: proc { |attributes| attributes['name'].blank? }
 
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: true
 end
