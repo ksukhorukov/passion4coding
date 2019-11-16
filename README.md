@@ -19,6 +19,9 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 
+bundle exec sidekiq -q default -q mailers
+bundle exec mailcatcher
+
 * Deployment instructions
 
 * ...

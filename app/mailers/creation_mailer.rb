@@ -4,6 +4,6 @@ class CreationMailer < ApplicationMailer
   def creation_email
   	@email = ENV['admin_email']
     @record = params[:record]
-    mail(to: @email, subject: "#{@record.class.name}. New record was created")
+    mail(to: @email, subject: "#{@record.class.name}. New record was created.")
   end	
 end

@@ -28,6 +28,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 # Configuration
 gem 'figaro'
 
+# Delayed jobs
+gem 'sidekiq'
+
 # Fake SMTP server
 gem 'mailcatcher'
 
