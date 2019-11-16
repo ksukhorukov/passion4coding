@@ -13,5 +13,13 @@ RSpec.describe Category, type: :model do
   	it 'should ensure inclusion of :state in array [true, false]' do 
   		expect(subject).to validate_inclusion_of(:state).in_array([true, false])
   	end
+
+    it 'must have unique name across all models' do 
+      course = FactoryBot.create(:course)
+      category = Category.first
+      binded_name = category.name
+      course.name = binded_name
+      expect(course.save) == false
+    end
   end
 end
