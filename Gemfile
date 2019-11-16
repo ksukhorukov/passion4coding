@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -40,17 +42,17 @@ gem 'mailcatcher'
 group :development, :test do
   # Documentation
   gem 'apipie-rails'
-  
+
   # Testing
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'ffaker'
+  gem 'rspec-rails'
 
   # Style-guide
   gem 'rubocop'
-  
+
   # Debug
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -61,10 +63,10 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'shoulda', '~> 3.5'
   gem 'shoulda-matchers'
-  gem 'rails-controller-testing'
 end

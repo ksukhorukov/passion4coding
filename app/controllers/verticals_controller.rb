@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class VerticalsController < ApplicationController
-  before_action :set_vertical, only: [:show, :update, :destroy]
+  before_action :set_vertical, only: %i[show update destroy]
 
   # GET /verticals
   def index
@@ -39,13 +41,14 @@ class VerticalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vertical
-      @vertical = Vertical.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def vertical_params
-      params.permit(:id, :name, categories_params: [:id, :name, :state, :vertical_id, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vertical
+    @vertical = Vertical.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def vertical_params
+    params.permit(:id, :name, categories_params: %i[id name state vertical_id _destroy])
+  end
 end

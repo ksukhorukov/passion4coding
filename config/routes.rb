@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-	root to: 'verticals#index'
+  root to: 'verticals#index'
 
   resources :courses
   resources :categories

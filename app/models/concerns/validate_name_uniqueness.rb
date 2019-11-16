@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ValidateNameUniqueness
   extend ActiveSupport::Concern
 
@@ -11,14 +13,13 @@ module ValidateNameUniqueness
   private
 
   def name_unique_across_all_models
-    return if self.name.blank?
+    return if name.blank?
+
     @@included_classes.each do |klass|
-      scope = klass.where(name: self.name)
-      if self.persisted? && klass == self.class
-        scope = scope.where.not(id: self.id)
-      end
+      scope = klass.where(name: name)
+      scope = scope.where.not(id: id) if persisted? && klass == self.class
       if scope.any?
-        self.errors.add :name, 'Name is already taken'
+        errors.add :name, 'Name is already taken'
         break
       end
     end
