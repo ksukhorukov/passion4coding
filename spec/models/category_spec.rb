@@ -8,6 +8,10 @@ RSpec.describe Category, type: :model do
 
   describe 'validations' do 
   	it { should validate_presence_of(:name) }
-  	it { should validate_presence_of(:state) }
+  	
+
+  	it 'should ensure inclusion of :state in array [true, false]' do 
+  		expect(subject).to validate_inclusion_of(:state).in_array([true, false])
+  	end
   end
 end
