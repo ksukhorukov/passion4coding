@@ -16,6 +16,17 @@ RSpec.describe "Categories", type: :request do
       post categories_path, params: { name: 'test category name', state: 'active', vertical_id: vertical.id }
       expect(response).to have_http_status(201)
     end
+
+     it "fails if name of the course is not unique name across all other tables" do 
+       course = FactoryBot.create(:course)
+       post categories_path, params: { 
+        name: course.name, 
+        author: 'test author', 
+        state: 'active', 
+        vertical_id: Vertical.first.id 
+       }
+       expect(response).to have_http_status(422)
+    end
   end
 
   describe "UPDATE /categorys" do

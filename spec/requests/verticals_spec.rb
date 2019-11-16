@@ -19,6 +19,12 @@ RSpec.describe "Verticals", type: :request do
       post verticals_path(params)
       expect(response).to have_http_status(201)
     end
+
+    it "fails if name of the course is not unique name across all other tables" do 
+       course = FactoryBot.create(:course)
+       post verticals_path, params: { name: course.name }
+       expect(response).to have_http_status(422)
+    end
   end
 
   describe "UPDATE /verticals" do

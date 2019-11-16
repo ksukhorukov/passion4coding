@@ -22,6 +22,17 @@ RSpec.describe "Courses", type: :request do
       
       expect(response).to have_http_status(201)
     end
+
+   it "fails if name of the course is not unique name across all other tables" do 
+     course = FactoryBot.create(:course)
+     post courses_path, params: { 
+      name: course.name, 
+      author: 'test author', 
+      state: 'active', 
+      category_id: course.category.id 
+     }
+     expect(response).to have_http_status(422)
+   end
   end
 
   describe "UPDATE /courses" do
