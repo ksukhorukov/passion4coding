@@ -27,6 +27,7 @@ class CategoriesController < ApplicationController
 
   api :POST, '/categories', 'Create category'
   param :name, String, required: true, desc: 'name of the new category'
+  param :state, String, required: true, desc: "'active' or 'disabled' state of the course"
   param :vertical_id, :number, required: true, desc: 'id of the parent vertical'
   # POST /categories
   def create
@@ -41,8 +42,9 @@ class CategoriesController < ApplicationController
 
   api :PUT, '/categories/:id', 'Update category'
   param :id, :number, required: true, desc: 'id of the requested category'
-  param :name, String, required: true, desc: 'name of the new category'
-  param :vertical_id, :number, required: true, desc: 'id of the parent vertical'
+  param :name, String, optional: true, desc: 'name of the new category'
+  param :state, String, optional: true, desc: "'active' or 'disabled' state of the course"
+  param :vertical_id, :number, optional: true, desc: 'id of the parent vertical'
   # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
@@ -68,6 +70,6 @@ class CategoriesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def category_params
-    params.permit(:id, :name, :state, :category_id, courses_params: %i[id name author state category_id _destroy])
+    params.permit(:id, :name, :state, :vertical_id, courses_params: %i[id name author state category_id _destroy])
   end
 end

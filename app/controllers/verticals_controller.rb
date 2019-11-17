@@ -40,7 +40,7 @@ class VerticalsController < ApplicationController
 
   api :PUT, '/verticals/:id', 'Update vertical'
   param :id, :number, required: true, desc: 'id of the requested vertical'
-  param :name, String, required: true, desc: 'new name of the new vertical'
+  param :name, String, optional: true, desc: 'new name of the new vertical'
   # PATCH/PUT /verticals/1
   def update
     if @vertical.update(vertical_params)

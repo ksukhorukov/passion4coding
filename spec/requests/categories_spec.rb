@@ -12,9 +12,9 @@ RSpec.describe 'Categories', type: :request do
     end
   end
 
-  describe 'POST /categorys' do
+  describe 'POST /categories' do
     it 'categories creation' do
-      vertical = FactoryBot.create(:vertical)
+      vertical = Vertical.create(name: 'test vertical')
       post categories_path, params: { name: 'test category name', state: 'active', vertical_id: vertical.id }
       expect(response).to have_http_status(201)
     end
