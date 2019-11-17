@@ -11,6 +11,7 @@
 # Deploy
 ```sh
 $ gem install bundler --version=2.0.2
+$ bundle
 $ rake db:create
 $ rake db:migrate
 $ bundle exec sidekiq -q default -q mailers
