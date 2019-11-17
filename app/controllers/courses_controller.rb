@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController
   # Documentation
-  resource_description do 
+  resource_description do
     short 'CRUD for Courses'
     formats ['json']
     error 404, 'Record not found.'

@@ -4,11 +4,11 @@ class VerticalsController < ApplicationController
   # Documentation
 
   def_param_group :post_categories_and_courses_nested do
-    param :categories_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+    param :categories_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
       param :name, String, desc: 'Name of the course', required: true
       param :state, String, desc: "'active'/'disabled' state", required: true
       param :_destroy, :number, desc: '1 or 0, delete of keep', require: false
-      param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+      param :courses_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
         param :name, String, desc: 'Name of the course', required: true
         param :author, String, desc: 'Author of the course', required: true
         param :state, String, desc: "'active'/'disabled' state", required: true
@@ -18,11 +18,11 @@ class VerticalsController < ApplicationController
   end
 
   def_param_group :update_categories_and_courses_nested do
-    param :categories_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+    param :categories_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
       param :name, String, desc: 'Name of the course', required: true
       param :state, String, desc: "'active'/'disabled' state", required: true
       param :_destroy, Integer, desc: '1 or 0, delete of keep', require: false
-      param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+      param :courses_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
         param :id, :number, desc: 'Id of the requested course', required: true
         param :name, String, desc: 'Name of the course', optional: true
         param :author, String, desc: 'Author of the course', optional: true
@@ -32,8 +32,7 @@ class VerticalsController < ApplicationController
     end
   end
 
-
-  resource_description do 
+  resource_description do
     short 'CRUD for Verticals'
     formats ['json']
     error 404, 'Record not found.'
@@ -86,7 +85,7 @@ class VerticalsController < ApplicationController
     end
   end
 
-  api :DELETE, "/verticals/:id", "Destroy vertical"
+  api :DELETE, '/verticals/:id', 'Destroy vertical'
   param :id, :number, required: true, desc: 'id of the requested vertical'
   # DELETE /verticals/1
   def destroy
@@ -102,9 +101,9 @@ class VerticalsController < ApplicationController
 
   def vertical_params
     params.permit(:id, :name, categories_params: [
-      :id, :name, :state, :vertical_id, :_destroy, courses_params: [
-        :id, :name, :state, :author, :category_id, :_destroy
-      ]
-    ])
+                    :id, :name, :state, :vertical_id, :_destroy, courses_params: %i[
+                      id name state author category_id _destroy
+                    ]
+                  ])
   end
 end

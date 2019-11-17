@@ -2,7 +2,7 @@
 
 class CategoriesController < ApplicationController
   # Documentation
-  resource_description do 
+  resource_description do
     short 'CRUD for Categories'
     formats ['json']
     error 404, 'Record not found.'
@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
   end
 
   def_param_group :post_courses_nested do
-    param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+    param :courses_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
       param :name, String, desc: 'Name of the course', required: true
       param :author, String, desc: 'author of the course', required: true
       param :state, String, desc: "'active'/'disabled' state", required: true
@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   def_param_group :update_courses_nested do
-    param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+    param :courses_params, Array, of: Hash, required: false, desc: 'Nested attributes for courses' do
       param :id, :number, desc: 'Id of the requested course', required: true
       param :name, String, desc: 'Name of the course', optional: true
       param :author, String, desc: 'author of the course', optional: true
