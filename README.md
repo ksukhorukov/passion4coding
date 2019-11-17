@@ -25,5 +25,6 @@ $ rspec
 $ rails s -p 3000
 ```
 # Documentation
+Notice: All routes are without "/api" prefix.
 http://localhost:3000/apipie
 # [EOF]
