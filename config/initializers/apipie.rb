@@ -9,3 +9,9 @@ Apipie.configure do |config|
   config.translate = false
   config.default_version = 'API documentation'
 end
+
+module Apipie
+  def self.api_base_url(version = nil)
+  	''
+  end
+end
