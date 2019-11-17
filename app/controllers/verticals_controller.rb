@@ -2,7 +2,7 @@
 
 class VerticalsController < ApplicationController
   resource_description do 
-    short 'Verticals'
+    short 'CRUD for Verticals'
     formats ['json']
     error 404, 'Record not found.'
     error 422, 'Invalid record. Unprocessable entity.'
