@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
+  # Documentation
   resource_description do 
     short 'CRUD for Courses'
     formats ['json']
@@ -28,6 +29,7 @@ class CoursesController < ApplicationController
   api :POST, '/courses', 'Create course'
   param :name, String, required: true, desc: 'name of the new course'
   param :state, String, required: true, desc: "'active' or 'disabled' state of the course"
+  param :author, String, required: true, desc: 'author of the course'
   param :category_id, :number, required: true, desc: 'id of the parent category'
   # POST /courses
   def create
@@ -44,6 +46,7 @@ class CoursesController < ApplicationController
   param :id, :number, optional: true, desc: 'id of the requested course'
   param :name, String, optional: true, desc: 'name of the new course'
   param :state, String, optional: true, desc: "'active' or 'disabled' state of the course"
+  param :author, String, optional: true, desc: 'author of the course'
   param :category_id, :number, optional: true, desc: 'id of the parent category'
   # PATCH/PUT /courses/1
   def update

@@ -1,6 +1,38 @@
 # frozen_string_literal: true
 
 class VerticalsController < ApplicationController
+  # Documentation
+
+  def_param_group :post_categories_and_courses_nested do
+    param :categories_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+      param :name, String, desc: 'Name of the course', required: true
+      param :state, String, desc: "'active'/'disabled' state", required: true
+      param :_destroy, :number, desc: '1 or 0, delete of keep', require: false
+      param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+        param :name, String, desc: 'Name of the course', required: true
+        param :author, String, desc: 'Author of the course', required: true
+        param :state, String, desc: "'active'/'disabled' state", required: true
+        param :_destroy, :number, desc: '1 or 0, delete of keep', require: false
+      end
+    end
+  end
+
+  def_param_group :update_categories_and_courses_nested do
+    param :categories_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+      param :name, String, desc: 'Name of the course', required: true
+      param :state, String, desc: "'active'/'disabled' state", required: true
+      param :_destroy, Integer, desc: '1 or 0, delete of keep', require: false
+      param :courses_params, Array, of: Hash, required: false, desc: "Nested attributes for courses" do
+        param :id, :number, desc: 'Id of the requested course', required: true
+        param :name, String, desc: 'Name of the course', optional: true
+        param :author, String, desc: 'Author of the course', optional: true
+        param :state, String, desc: "'active'/'disabled' state", optional: true
+        param :_destroy, :number, desc: '1 or 0, delete of keep', optional: true
+      end
+    end
+  end
+
+
   resource_description do 
     short 'CRUD for Verticals'
     formats ['json']
@@ -27,6 +59,8 @@ class VerticalsController < ApplicationController
 
   api :POST, '/verticals', 'Create vertical'
   param :name, String, required: true, desc: 'name of the new vertical'
+
+  param_group :post_categories_and_courses_nested
   # POST /verticals
   def create
     @vertical = Vertical.new(vertical_params)
@@ -41,6 +75,8 @@ class VerticalsController < ApplicationController
   api :PUT, '/verticals/:id', 'Update vertical'
   param :id, :number, required: true, desc: 'id of the requested vertical'
   param :name, String, optional: true, desc: 'new name of the new vertical'
+
+  param_group :update_categories_and_courses_nested
   # PATCH/PUT /verticals/1
   def update
     if @vertical.update(vertical_params)
@@ -64,8 +100,11 @@ class VerticalsController < ApplicationController
     @vertical = Vertical.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def vertical_params
-    params.permit(:id, :name, categories_params: %i[id name state vertical_id _destroy])
+    params.permit(:id, :name, categories_params: [
+      :id, :name, :state, :vertical_id, :_destroy, courses_params: [
+        :id, :name, :state, :author, :category_id, :_destroy
+      ]
+    ])
   end
 end
