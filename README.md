@@ -1,28 +1,29 @@
-# README
+# Description and specification
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Fullstack Challenge](http://bit.ly/fullstack_challenge)
 
-Things you may want to cover:
+# Requirements
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-bundle exec sidekiq -q default -q mailers
-bundle exec mailcatcher
-
-* Deployment instructions
-
-* ...
-# passion4coding
+  - Ruby 2.6.5
+  - PostgreSQL 11 or higher
+  - Redis 4.0.9 or higher
+  - *nix
+# Deploy
+```sh
+$ gem install bundler --version=2.0.2
+$ rake db:create
+$ rake db:migrate
+$ bundle exec sidekiq -q default -q mailers
+$ bundle exec mailcatcher
+```
+# Test
+```sh
+$ rspec
+```
+# Run
+```sh
+$ rails s -p 3000
+```
+# Documentation
+http://localhost:3000/apipie
+# [EOF]
